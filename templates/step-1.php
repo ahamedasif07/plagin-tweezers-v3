@@ -51,7 +51,7 @@ if (! defined('ABSPATH')) {
 			<span class="ttq-product-card__media">
 				<?php if (! empty($product['image'])) : ?>
 					<img src="<?php echo esc_url($product['image']); ?>" alt="<?php echo esc_attr($product['label']); ?>"
-						loading="lazy" />
+						style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" />
 				<?php else : ?>
 					<span class="ttq-product-card__placeholder" aria-hidden="true">
 						<svg viewBox="0 0 160 120" width="160" height="120">
@@ -144,15 +144,23 @@ if (! defined('ABSPATH')) {
      ============================================================ -->
 <div class="ttq-modal ttq-js-details-modal" hidden>
 	<div class="ttq-modal__backdrop ttq-js-modal-close"></div>
-	<div class="ttq-modal__panel" role="dialog" aria-modal="true" aria-label="<?php esc_attr_e('Product details', 'ttq'); ?>">
-		<button type="button" class="ttq-modal__close ttq-js-modal-close" aria-label="<?php esc_attr_e('Close', 'ttq'); ?>">
-			<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
+	<div class="ttq-modal__panel" role="dialog" aria-modal="true"
+		aria-label="<?php esc_attr_e('Product details', 'ttq'); ?>">
+		<button type="button" class="ttq-modal__close ttq-js-modal-close"
+			aria-label="<?php esc_attr_e('Close', 'ttq'); ?>">
+			<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+				stroke-linecap="round" stroke-linejoin="round">
+				<line x1="18" y1="6" x2="6" y2="18" />
+				<line x1="6" y1="6" x2="18" y2="18" />
+			</svg>
 		</button>
 
 		<!-- Tick Tweezers Only -->
 		<div class="ttq-modal__body" data-modal-body="tweezers_only" hidden>
 			<h4><?php esc_html_e('Tick Tweezers Only', 'ttq'); ?></h4>
-			<p class="ttq-modal__intro"><?php esc_html_e('Your reliable tick removal solution — precise, safe, and built to last.', 'ttq'); ?></p>
+			<p class="ttq-modal__intro">
+				<?php esc_html_e('Your reliable tick removal solution — precise, safe, and built to last.', 'ttq'); ?>
+			</p>
 			<ul class="ttq-modal__list">
 				<li>
 					<strong><?php esc_html_e('Precision tip for easy removal', 'ttq'); ?></strong>
@@ -184,7 +192,9 @@ if (! defined('ABSPATH')) {
 		<!-- Complete Tick Kit -->
 		<div class="ttq-modal__body" data-modal-body="complete_kit" hidden>
 			<h4><?php esc_html_e('Complete Tick Removal Kit', 'ttq'); ?></h4>
-			<p class="ttq-modal__intro"><?php esc_html_e('Everything needed to support safe tick removal and prevention awareness — in one convenient kit.', 'ttq'); ?></p>
+			<p class="ttq-modal__intro">
+				<?php esc_html_e('Everything needed to support safe tick removal and prevention awareness — in one convenient kit.', 'ttq'); ?>
+			</p>
 			<ul class="ttq-modal__list">
 				<li>
 					<strong><?php esc_html_e('Tick removal tweezers included', 'ttq'); ?></strong>
