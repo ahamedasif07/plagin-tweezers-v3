@@ -1,0 +1,2363 @@
+/* ================================================================
+   TickTweezers Quote Configurator — Front-end Styles
+   Design: Premium wizard matching reference screenshots
+   ================================================================ */
+
+/* Shake animation for invalid fields */
+@keyframes ttqShake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  20% {
+    transform: translateX(-6px);
+  }
+
+  40% {
+    transform: translateX(6px);
+  }
+
+  60% {
+    transform: translateX(-4px);
+  }
+
+  80% {
+    transform: translateX(4px);
+  }
+}
+
+.ttq-shake {
+  animation: ttqShake 0.5s ease;
+}
+
+/* ── Google Font (Inter) fallback via CSS import ──────────────── */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
+
+/* ── Design Tokens ────────────────────────────────────────────── */
+.ttq-wizard {
+  --ttq-red: #b71c2b;
+  --ttq-red-dark: #8f1521;
+  --ttq-red-light: #fdf3f4;
+  --ttq-red-glow: rgba(183, 28, 43, 0.14);
+  --ttq-gray-50: #f9fafb;
+  --ttq-gray-100: #f4f5f7;
+  --ttq-gray-200: #e5e7eb;
+  --ttq-gray-300: #d1d5db;
+  --ttq-gray-400: #9ca3af;
+  --ttq-gray-600: #6b7280;
+  --ttq-gray-800: #374151;
+  --ttq-gray-900: #111827;
+  --ttq-radius: 16px;
+  --ttq-radius-sm: 10px;
+  --ttq-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  --ttq-shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.14);
+
+  max-width: 1400px;
+  margin: 50px auto;
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Arial,
+    sans-serif;
+  color: var(--ttq-gray-900);
+  position: relative;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.ttq-wizard *,
+.ttq-wizard *::before,
+.ttq-wizard *::after {
+  box-sizing: border-box;
+}
+
+.ttq-visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ================================================================
+   SHELL: Left Sidebar + Content Column
+   ================================================================ */
+.ttq-shell {
+  display: flex;
+  align-items: stretch;
+  background: #fff;
+  border-radius: var(--ttq-radius);
+  box-shadow: var(--ttq-shadow);
+  overflow: visible;
+  min-height: 600px;
+}
+
+/* ── Left Rail (Sidebar) ──────────────────────────────────────── */
+.ttq-rail {
+  flex: 0 0 100px;
+  background: var(--ttq-red);
+  border-radius: var(--ttq-radius) 0 0 var(--ttq-radius);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  padding: 60px 0 40px;
+  color: #fff;
+  overflow: visible;
+}
+
+/* Clipboard icon badge (top) */
+.ttq-rail__icon-main {
+  position: absolute;
+  top: 25px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--ttq-red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+  z-index: 10;
+}
+
+/* Edit badge (top-right overflow) */
+.ttq-rail__icon-step {
+  position: absolute;
+  top: 10px;
+  right: -16px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--ttq-red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+}
+
+/* STEP X OF 3 */
+.ttq-rail__stepof {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.1;
+  margin-bottom: 8px;
+  margin-top: 50px;
+}
+.ttq-rail__stepof-label {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  opacity: 0.8;
+  text-transform: uppercase;
+}
+
+.ttq-rail__stepof-num {
+  font-size: 48px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.ttq-rail__stepof-of {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  opacity: 0.8;
+  text-transform: uppercase;
+}
+
+/* Step dots */
+.ttq-rail__dots {
+  list-style: none;
+  margin: 24px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 64px;
+  position: relative;
+  max-height: 343px;
+  margin-top: 50px;
+}
+
+.ttq-rail__dots::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  left: 50%;
+  width: 0;
+  border-left: 2px dashed rgba(255, 255, 255, 0.45);
+  transform: translateX(-50%);
+  z-index: 0;
+}
+
+.ttq-rail__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.45);
+  position: relative;
+  z-index: 1;
+  cursor: default;
+  transition: all 0.25s ease;
+}
+
+.ttq-rail__dot:not(.is-disabled) {
+  cursor: pointer;
+}
+
+.ttq-rail__dot.is-complete {
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.4);
+}
+
+.ttq-rail__dot.is-current {
+  width: 18px;
+  height: 18px;
+  background: #fff;
+  border: 3px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25);
+}
+
+/* Tick bug decoration */
+.ttq-rail__bug {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0.35;
+}
+/* Responsive Fix for All Devices */
+
+/* Mobile + Tablet Devices (up to 1024px) — shell stacks into a single
+   column: horizontal rail on top, content below it, help widget last. */
+@media (max-width: 1024px) {
+  .ttq-shell {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    min-height: auto;
+  }
+
+  .ttq-rail {
+    flex: 0 0 auto;
+    width: 100%;
+    padding: 20px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: var(--ttq-radius) var(--ttq-radius) 0 0;
+  }
+
+  .ttq-rail__icon-main,
+  .ttq-rail__bug {
+    display: none;
+  }
+
+  .ttq-rail__stepof {
+    margin: 0;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 8px;
+  }
+
+  .ttq-rail__stepof-num {
+    font-size: 20px;
+  }
+
+  .ttq-rail__dots {
+    flex-direction: row;
+    margin-top: 0;
+    gap: 15px;
+  }
+
+  .ttq-rail__dots::before {
+    display: none;
+  }
+
+  .ttq-content {
+    width: 100%;
+  }
+}
+
+/* Desktop/Large Devices (1025px and up) — rail, content and the help
+   widget sit side by side in a single row. */
+@media (min-width: 1025px) {
+  .ttq-shell {
+    flex-direction: row;
+  }
+}
+/* ================================================================
+   CONTENT AREA
+   ================================================================ */
+.ttq-content {
+  flex: 1;
+  min-width: 0;
+  padding: 36px 40px 40px;
+}
+
+/* ── Top Bar ──────────────────────────────────────────────────── */
+.ttq-topbar {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px 24px;
+}
+
+.ttq-topbar__title {
+  flex: 0 1 auto;
+  min-width: 150px;
+}
+.ttq-topbar__title > div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ttq-topbar__eyebrow {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--ttq-red);
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
+
+.ttq-topbar__heading {
+  font-size: 15px;
+  font-weight: 800;
+  margin: 0;
+}
+
+/* ── Step Progress Track (1 → 2 → 3) ─────────────────────────── */
+.ttq-step-track {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex: 1 1 220px;
+  justify-content: center;
+  min-width: 220px;
+}
+
+.ttq-step-track__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  position: relative;
+}
+
+.ttq-step-track__bubble {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--ttq-gray-200);
+  color: var(--ttq-gray-600);
+  font-size: 14px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  border: 2px solid transparent;
+}
+
+.ttq-step-track__label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ttq-gray-400);
+  white-space: nowrap;
+  transition: color 0.25s ease;
+}
+
+.ttq-step-track__line {
+  flex: 1;
+  height: 2px;
+  background: var(--ttq-gray-200);
+  min-width: 36px;
+  transition: background 0.25s ease;
+  margin-bottom: 18px;
+  /* push line to center of bubbles */
+}
+
+/* Active & completed states (set by JS) */
+.ttq-step-track__item.is-active .ttq-step-track__bubble {
+  background: var(--ttq-red);
+  color: #fff;
+  border-color: var(--ttq-red);
+  box-shadow: 0 0 0 4px var(--ttq-red-glow);
+}
+
+.ttq-step-track__item.is-active .ttq-step-track__label {
+  color: var(--ttq-red);
+  font-weight: 700;
+}
+
+.ttq-step-track__item.is-complete .ttq-step-track__bubble {
+  background: #16a34a;
+  color: #fff;
+  border-color: #16a34a;
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.18);
+  transition: all 0.3s ease;
+}
+
+.ttq-step-track__item.is-complete .ttq-step-track__label {
+  color: #16a34a;
+  font-weight: 700;
+}
+
+.ttq-step-track__line.is-complete {
+  background: #16a34a;
+}
+
+/* Trust badge */
+.ttq-topbar__trust {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--ttq-gray-100);
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 13px;
+  color: rgb(68, 68, 68);
+  max-width: 260px;
+  font-weight: 500;
+  text-align: left;
+  margin: 0;
+}
+
+.ttq-topbar__trust svg {
+  color: var(--ttq-red);
+  flex-shrink: 0;
+}
+
+/* 100% Completed badge */
+.ttq-topbar__completed {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #ecfdf5;
+  color: #065f46;
+  border: 1px solid #6ee7b7;
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.ttq-topbar__completed[hidden] {
+  display: none;
+}
+
+.ttq-topbar__completed svg {
+  color: #059669;
+}
+
+/* ================================================================
+   STEP HEAD / GENERIC FIELDS
+   ================================================================ */
+.ttq-step-head {
+  margin-bottom: 30px;
+  margin-top: 30px;
+}
+
+.ttq-step-head h3 {
+  font-size: 26px;
+  font-weight: 800;
+  margin: 0 0 6px;
+  text-align: center;
+}
+
+.ttq-sub {
+  color: var(--ttq-gray-600);
+  margin: 0;
+  font-size: 14px;
+  text-align: center;
+}
+
+.ttq-field-group {
+  margin-bottom: 18px;
+}
+
+.ttq-field-group--split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 0;
+}
+
+@media (max-width: 580px) {
+  .ttq-field-group--split {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ttq-field-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 13px;
+  color: var(--ttq-gray-800);
+}
+
+.req {
+  color: var(--ttq-red);
+}
+
+.ttq-optional {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--ttq-gray-400);
+  margin-left: 4px;
+}
+
+.ttq-wizard input[type="text"],
+.ttq-wizard input[type="email"],
+.ttq-wizard input[type="tel"],
+.ttq-wizard input[type="number"],
+.ttq-wizard textarea {
+  width: 100%;
+  border: 1.5px solid var(--ttq-gray-200);
+  border-radius: var(--ttq-radius-sm);
+  padding: 12px 14px;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--ttq-gray-900);
+  background: #fff;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.ttq-wizard input:focus,
+.ttq-wizard textarea:focus {
+  outline: none;
+  border-color: var(--ttq-red);
+  box-shadow: 0 0 0 3px var(--ttq-red-glow);
+}
+
+.ttq-wizard input.ttq-invalid,
+.ttq-wizard textarea.ttq-invalid {
+  border-color: #dc2626;
+}
+
+.ttq-field-error {
+  color: #dc2626;
+  font-size: 12px;
+  margin-top: 5px;
+  min-height: 0;
+}
+
+.ttq-hint {
+  color: var(--ttq-gray-400);
+  font-size: 12px;
+  margin: 6px 0 0;
+}
+
+.ttq-link-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--ttq-red);
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  text-decoration: underline;
+  font-family: inherit;
+}
+
+.ttq-link-btn--danger {
+  color: #dc2626;
+}
+
+/* ================================================================
+   STEP 1 — PRODUCT CARDS
+   ================================================================ */
+.ttq-product-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* unchanged — still 2 cards per row */
+  gap: 24px;
+  margin-top: 16px;
+}
+
+@media (max-width: 680px) {
+  .ttq-product-grid {
+    grid-template-columns: 1fr; /* unchanged — 1 card per row on mobile */
+  }
+}
+
+.ttq-product-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr; /* was 40% / 60% — now single column */
+  grid-template-rows: auto auto auto; /* image row, body row, footer row */
+  border: 2px solid var(--ttq-gray-200);
+  border-radius: var(--ttq-radius);
+  cursor: pointer;
+  background: #fff;
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.2s ease;
+  overflow: visible; /* so the ribbon can sit above the border instead of being clipped */
+  padding: 0;
+}
+
+.ttq-product-card:hover {
+  border-color: var(--ttq-gray-300);
+  transform: translateY(-4px);
+  box-shadow: var(--ttq-shadow-lg);
+}
+
+.ttq-product-card:hover .ttq-product-card__media img {
+  transform: scale(1.04); /* subtle premium zoom on hover */
+}
+.ttq-product-card .ttq-product-card__media img {
+  height: 300px;
+  object-fit: contain;
+  width: 100%;
+}
+
+.ttq-product-card:has(.ttq-product-card__radio:checked) {
+  border-color: var(--ttq-red);
+  box-shadow:
+    0 0 0 4px var(--ttq-red-glow),
+    var(--ttq-shadow);
+}
+
+/* Checked badge — sits on the image, top-right */
+.ttq-product-card:has(.ttq-product-card__radio:checked)::after {
+  content: "✓";
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--ttq-red);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 900;
+  z-index: 6;
+  box-shadow: 0 2px 8px rgba(183, 28, 43, 0.35);
+}
+
+/* Featured card extra styling */
+.ttq-product-card.is-featured {
+  border-color: var(--ttq-gray-300);
+}
+
+.ttq-product-card.is-featured:has(.ttq-product-card__radio:checked) {
+  border-color: var(--ttq-red);
+}
+
+/* Hidden real radio */
+.ttq-product-card__radio {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+}
+
+/* Custom radio circle — sits on the image, top-left */
+.ttq-product-card__radio-ui {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid var(--ttq-gray-300);
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  z-index: 5;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18); /* stays legible sitting on top of a photo */
+}
+
+.ttq-product-card__radio-ui::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--ttq-red);
+  opacity: 0;
+  transition:
+    opacity 0.2s,
+    transform 0.2s;
+  transform: scale(0.5);
+}
+
+.ttq-product-card:has(.ttq-product-card__radio:checked)
+  .ttq-product-card__radio-ui {
+  border-color: var(--ttq-red);
+  background: var(--ttq-red-light);
+  box-shadow: 0 0 0 3px var(--ttq-red-glow);
+}
+
+.ttq-product-card:has(.ttq-product-card__radio:checked)
+  .ttq-product-card__radio-ui::after {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* MOST POPULAR ribbon — pokes above the card's top border */
+.ttq-product-card__ribbon {
+  position: absolute;
+  top: -18px;
+  left: 52px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--ttq-red);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 6px 14px 6px 10px;
+  border-radius: 999px;
+  box-shadow: 0 4px 12px rgba(183, 28, 43, 0.35);
+  z-index: 100;
+  white-space: nowrap;
+}
+
+/* Product image — big, full-width, on top of the card */
+.ttq-product-card__media {
+  grid-column: 1;
+  grid-row: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ttq-gray-50);
+  border-radius: var(--ttq-radius) var(--ttq-radius) 0 0; /* rounds the image's own top corners now that the card isn't clipping it */
+  overflow: hidden;
+  width: 100%;
+  height: 300px; /* big and clearly visible */
+  padding: 0;
+}
+
+.ttq-product-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.ttq-product-card__placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ttq-gray-300);
+  width: 100%;
+  height: 100%;
+}
+
+/* Card body — below the image */
+.ttq-product-card__body {
+  grid-column: 1;
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 22px 24px 16px;
+}
+
+.ttq-product-card__title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.ttq-product-card__title {
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.ttq-product-card__price {
+  font-size: 13px;
+  color: var(--ttq-gray-600);
+}
+
+.ttq-product-card__price strong {
+  color: var(--ttq-red);
+  font-size: 20px;
+  font-weight: 800;
+}
+
+/* Feature list */
+.ttq-product-card__features {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.ttq-product-card__feature {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ttq-check {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--ttq-red);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Best For badge */
+.ttq-product-card__bestfor {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: var(--ttq-gray-50);
+  border: 1px solid var(--ttq-gray-200);
+  border-radius: var(--ttq-radius-sm);
+  padding: 10px 12px;
+  font-size: 12px;
+  color: var(--ttq-gray-600);
+}
+
+.ttq-product-card__bestfor-icon {
+  color: var(--ttq-red);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.ttq-product-card__bestfor strong {
+  display: block;
+  color: var(--ttq-gray-900);
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+/* Card footer — below the body */
+.ttq-product-card__footer {
+  grid-column: 1;
+  grid-row: 3;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px;
+  border-top: 1px solid var(--ttq-gray-200);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ttq-red);
+  background: var(--ttq-gray-50);
+  border-radius: 0 0 var(--ttq-radius) var(--ttq-radius); /* rounds the footer's own bottom corners now that the card isn't clipping it */
+}
+
+.ttq-product-card__footer-arrow {
+  font-size: 18px;
+  line-height: 1;
+  font-weight: 900;
+  transition: transform 0.2s ease;
+}
+
+.ttq-product-card:hover .ttq-product-card__footer-arrow {
+  transform: translateX(3px);
+}
+
+/* Slightly shorter image on small phones so the card doesn't get too tall */
+@media (max-width: 480px) {
+  .ttq-product-card__media {
+    height: 220px;
+  }
+}
+
+/* Remove heading outline on focus */
+.ttq-topbar__heading:focus {
+  outline: none !important;
+}
+/* ================================================================
+   STEP 2 — SECTION CARDS
+   ================================================================ */
+.ttq-section-card {
+  border: 1.5px solid var(--ttq-gray-200);
+  border-radius: var(--ttq-radius);
+  padding: 20px 24px;
+  margin-bottom: 18px;
+  background: #fff;
+}
+
+.ttq-section-card__header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--ttq-gray-200);
+}
+
+.ttq-section-card__icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--ttq-red-light);
+  color: var(--ttq-red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ttq-section-card__title {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--ttq-gray-900);
+  flex: 1;
+}
+
+.ttq-section-card__hint {
+  font-size: 11px;
+  color: var(--ttq-gray-400);
+  font-weight: 500;
+}
+
+/* Quantity stepper */
+.ttq-qty-stepper {
+  display: inline-flex;
+  align-items: center;
+  border: 1.5px solid var(--ttq-gray-200);
+  border-radius: var(--ttq-radius-sm);
+  overflow: hidden;
+}
+
+.ttq-qty-btn {
+  width: 48px;
+  height: 48px;
+  border: none;
+  background: var(--ttq-gray-100);
+  font-size: 20px;
+  cursor: pointer;
+  color: var(--ttq-gray-800);
+  transition: background 0.15s;
+}
+
+.ttq-qty-btn:hover {
+  background: var(--ttq-gray-200);
+}
+
+.ttq-qty-stepper input {
+  border: none !important;
+  box-shadow: none !important;
+  width: 96px;
+  text-align: center;
+  border-radius: 0 !important;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+/* Color swatches */
+.ttq-color-grid,
+.ttq-size-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.ttq-color-swatch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--ttq-gray-600);
+}
+
+.ttq-color-swatch input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+.ttq-color-swatch__dot {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--ttq-swatch-color, #ccc);
+  border: 2.5px solid var(--ttq-gray-200);
+  display: block;
+  position: relative;
+  transition:
+    transform 0.18s,
+    box-shadow 0.18s;
+}
+
+.ttq-color-swatch input:focus-visible + .ttq-color-swatch__dot {
+  outline: 2px solid var(--ttq-red);
+  outline-offset: 2px;
+}
+
+.ttq-color-swatch input:checked + .ttq-color-swatch__dot {
+  transform: scale(1.14);
+  box-shadow:
+    0 0 0 3px #fff,
+    0 0 0 5px var(--ttq-red);
+}
+
+.ttq-color-swatch input:checked + .ttq-color-swatch__dot::after {
+  content: "✓";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 900;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* Size chips */
+.ttq-size-chip {
+  border: 1.5px solid var(--ttq-gray-200);
+  border-radius: 999px;
+  padding: 9px 22px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.18s;
+}
+
+.ttq-size-chip input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+.ttq-size-chip:has(input:checked) {
+  border-color: var(--ttq-red);
+  background: var(--ttq-red);
+  color: #fff;
+}
+
+.ttq-size-chip:has(input:focus-visible) {
+  outline: 2px solid var(--ttq-red);
+  outline-offset: 2px;
+}
+
+/* Char counter */
+.ttq-char-counter {
+  text-align: right;
+  font-size: 11px;
+  color: var(--ttq-gray-400);
+  margin: 4px 0 0;
+}
+
+/* Logo uploader */
+.ttq-uploader__dropzone {
+  border: 2px dashed var(--ttq-gray-300);
+  border-radius: var(--ttq-radius);
+  padding: 36px;
+  text-align: center;
+  cursor: pointer;
+  color: var(--ttq-gray-600);
+  transition:
+    border-color 0.2s,
+    background 0.2s;
+}
+
+.ttq-uploader__dropzone:hover,
+.ttq-uploader__dropzone.is-dragover {
+  border-color: var(--ttq-red);
+  background: var(--ttq-red-light);
+}
+
+.ttq-uploader__dropzone svg {
+  color: var(--ttq-gray-300);
+}
+
+.ttq-uploader__dropzone p {
+  margin: 10px 0 0;
+  font-size: 14px;
+}
+
+.ttq-uploader__progress {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ttq-uploader__progress-bar {
+  flex: 1;
+  height: 8px;
+  background: var(--ttq-gray-200);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.ttq-js-progress-fill {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--ttq-red);
+  transition: width 0.2s;
+}
+
+.ttq-uploader__preview {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1.5px solid var(--ttq-gray-200);
+  border-radius: var(--ttq-radius-sm);
+  padding: 10px 14px;
+}
+
+.ttq-uploader__preview img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  border-radius: 6px;
+  background: var(--ttq-gray-100);
+}
+
+.ttq-js-preview-name {
+  flex: 1;
+  font-size: 13px;
+  word-break: break-all;
+}
+
+/* ================================================================
+   STEP 3 — CONTACT CARD SECTIONS
+   ================================================================ */
+.ttq-contact-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1.5px solid var(--ttq-gray-200);
+  border-radius: var(--ttq-radius);
+  overflow: hidden;
+}
+
+.ttq-contact-card__section {
+  padding: 20px 24px;
+}
+
+.ttq-contact-card__section:not(:last-child) {
+  border-bottom: 1px solid var(--ttq-gray-200);
+}
+
+.ttq-contact-card__section-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--ttq-gray-800);
+  margin-bottom: 16px;
+}
+
+/* Yes/No radio pills */
+.ttq-radio-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.ttq-radio-pill {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  border: 1.5px solid var(--ttq-gray-200);
+  border-radius: 999px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.18s;
+}
+
+.ttq-radio-pill input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+.ttq-radio-pill span {
+  padding: 9px 22px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ttq-gray-700);
+  display: block;
+}
+
+.ttq-radio-pill:has(input:checked) {
+  border-color: var(--ttq-red);
+  background: var(--ttq-red);
+}
+
+.ttq-radio-pill:has(input:checked) span {
+  color: #fff;
+}
+
+/* Callouts */
+.ttq-callout {
+  display: flex;
+  gap: 12px;
+  border-radius: var(--ttq-radius-sm);
+  padding: 14px 16px;
+  margin-top: 12px;
+  font-size: 13px;
+}
+
+.ttq-callout__icon {
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.ttq-callout p {
+  margin: 2px 0 0;
+}
+
+.ttq-callout--warning {
+  background: #fef2f2;
+  color: #7f1d1d;
+}
+
+.ttq-callout--warning svg {
+  color: #dc2626;
+}
+
+.ttq-callout--info {
+  background: #eff6ff;
+  color: #1e3a8a;
+}
+
+.ttq-callout--info svg {
+  color: #3b82f6;
+}
+
+.ttq-callout--neutral {
+  background: var(--ttq-gray-100);
+  color: var(--ttq-gray-800);
+}
+
+.ttq-callout--neutral svg {
+  color: var(--ttq-gray-600);
+}
+
+.ttq-callout--success {
+  background: #f0fdf4;
+  color: #14532d;
+}
+
+.ttq-callout--success svg {
+  color: #16a34a;
+}
+
+.ttq-callout--compact {
+  padding: 10px 14px;
+  font-size: 12px;
+  margin-top: 14px;
+}
+
+/* ================================================================
+   STEP 4 — REVIEW
+   ================================================================ */
+
+/* Three callout boxes at the top */
+.ttq-review-callouts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 700px) {
+  .ttq-review-callouts {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ttq-review-callouts .ttq-callout {
+  margin-top: 0;
+}
+
+/* 3-column review grid */
+.ttq-review-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 760px) {
+  .ttq-review-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ttq-review-card {
+  border: 1.5px solid var(--ttq-gray-200);
+  border-radius: var(--ttq-radius);
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.ttq-review-card__title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--ttq-red);
+  margin: 0;
+}
+
+.ttq-review-card__icon {
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  background: var(--ttq-red-light);
+  color: var(--ttq-red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Product preview (image + name) */
+.ttq-review-card__product-preview {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--ttq-gray-50);
+  border-radius: var(--ttq-radius-sm);
+  padding: 10px 12px;
+}
+
+.ttq-review-card__thumb {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+  border-radius: 8px;
+  background: var(--ttq-gray-100);
+  flex-shrink: 0;
+}
+
+.ttq-review-card__product-name {
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.ttq-review-card__product-tag {
+  font-size: 11px;
+  color: var(--ttq-red);
+  font-weight: 700;
+  margin: -8px 0 0;
+}
+
+/* Review DL */
+.ttq-review-dl {
+  margin: 0;
+}
+
+.ttq-review-dl > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 7px 0;
+  border-bottom: 1px dashed var(--ttq-gray-200);
+  font-size: 13px;
+}
+
+.ttq-review-dl > div:last-child {
+  border-bottom: none;
+}
+
+.ttq-review-dl dt {
+  color: var(--ttq-gray-600);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
+}
+
+.ttq-review-dl dd {
+  margin: 0;
+  font-weight: 600;
+  text-align: right;
+  word-break: break-word;
+}
+
+/* Address column */
+.ttq-review-address__text {
+  font-size: 13px;
+  font-weight: 500;
+  margin: 0;
+  white-space: pre-line;
+}
+
+.ttq-review-address__org {
+  margin: 2px 0 0;
+}
+
+/* Logo in review */
+.ttq-review-logo-wrap {
+  margin-top: auto;
+}
+
+.ttq-review-logo {
+  max-width: 80px;
+  max-height: 60px;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+/* ================================================================
+   NAVIGATION ROW + BUTTONS
+   ================================================================ */
+.ttq-nav-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 28px;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.ttq-nav-row--end {
+  justify-content: flex-end;
+}
+
+.ttq-btn {
+  border-radius: var(--ttq-radius-sm);
+  padding: 13px 28px;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.18s;
+  font-family: inherit;
+  white-space: nowrap;
+}
+
+.ttq-btn--primary {
+  background: var(--ttq-red);
+  color: #fff;
+  border-color: var(--ttq-red);
+}
+
+.ttq-btn--primary:hover {
+  background: var(--ttq-red-dark);
+  border-color: var(--ttq-red-dark);
+}
+
+.ttq-btn--primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.ttq-btn--ghost {
+  background: #fff;
+  color: var(--ttq-red);
+  border-color: var(--ttq-red);
+}
+
+.ttq-btn--ghost:hover {
+  background: var(--ttq-red);
+  color: white;
+  border-color: var(--ttq-red);
+}
+
+/* CTA submit button — extra emphasis */
+.ttq-btn--cta {
+  padding: 14px 32px;
+  font-size: 16px;
+  box-shadow: 0 4px 16px rgba(183, 28, 43, 0.35);
+}
+
+.ttq-btn--cta:hover {
+  box-shadow: 0 6px 22px rgba(183, 28, 43, 0.45);
+  transform: translateY(-1px);
+}
+
+/* Safety note */
+.ttq-safe-note {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  justify-content: center;
+  font-size: 12px;
+  color: var(--ttq-gray-400);
+  margin-top: 16px;
+}
+
+/* ================================================================
+   OVERLAY: Submitting + Success + Error
+   ================================================================ */
+.ttq-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 24, 39, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px;
+  backdrop-filter: blur(3px);
+}
+
+.ttq-overlay[hidden] {
+  display: none;
+}
+
+.ttq-overlay__panel {
+  background: #fff;
+  border-radius: 20px;
+  padding: 44px 36px;
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.25);
+  animation: ttqPopIn 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes ttqPopIn {
+  from {
+    opacity: 0;
+    transform: scale(0.88);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.ttq-overlay__panel h3 {
+  margin: 20px 0 8px;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.ttq-overlay__panel p {
+  margin: 0;
+  color: var(--ttq-gray-600);
+  font-size: 14px;
+}
+
+/* Tick spinner (submitting) — dots stay fixed, color chases around */
+.ttq-tick-spinner {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin: 0 auto;
+}
+
+.ttq-tick-spinner__dots {
+  position: absolute;
+  inset: 0;
+}
+
+.ttq-tick-spinner__dots circle {
+  fill: #f7d6d9;
+  animation: ttqDotChase 1.6s linear infinite;
+}
+
+/* 16 dots, each fires the color pulse a bit later than the previous one */
+.ttq-tick-spinner__dots circle:nth-child(1) {
+  animation-delay: 0s;
+}
+.ttq-tick-spinner__dots circle:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.ttq-tick-spinner__dots circle:nth-child(3) {
+  animation-delay: 0.2s;
+}
+.ttq-tick-spinner__dots circle:nth-child(4) {
+  animation-delay: 0.3s;
+}
+.ttq-tick-spinner__dots circle:nth-child(5) {
+  animation-delay: 0.4s;
+}
+.ttq-tick-spinner__dots circle:nth-child(6) {
+  animation-delay: 0.5s;
+}
+.ttq-tick-spinner__dots circle:nth-child(7) {
+  animation-delay: 0.6s;
+}
+.ttq-tick-spinner__dots circle:nth-child(8) {
+  animation-delay: 0.7s;
+}
+.ttq-tick-spinner__dots circle:nth-child(9) {
+  animation-delay: 0.8s;
+}
+.ttq-tick-spinner__dots circle:nth-child(10) {
+  animation-delay: 0.9s;
+}
+.ttq-tick-spinner__dots circle:nth-child(11) {
+  animation-delay: 1s;
+}
+.ttq-tick-spinner__dots circle:nth-child(12) {
+  animation-delay: 1.1s;
+}
+.ttq-tick-spinner__dots circle:nth-child(13) {
+  animation-delay: 1.2s;
+}
+.ttq-tick-spinner__dots circle:nth-child(14) {
+  animation-delay: 1.3s;
+}
+.ttq-tick-spinner__dots circle:nth-child(15) {
+  animation-delay: 1.4s;
+}
+.ttq-tick-spinner__dots circle:nth-child(16) {
+  animation-delay: 1.5s;
+}
+
+@keyframes ttqDotChase {
+  0% {
+    fill: var(--ttq-red);
+  }
+  25% {
+    fill: #f0a3a3;
+  }
+  50% {
+    fill: #f7d6d9;
+  }
+  100% {
+    fill: #f7d6d9;
+  }
+}
+
+.ttq-tick-spinner__bug {
+  position: absolute;
+  top: 28px;
+  left: 28px;
+  width: 64px;
+  height: 64px;
+  animation: ttqPulse 1.4s ease-in-out infinite;
+}
+
+.ttq-tick-spinner__bug ellipse,
+.ttq-tick-spinner__bug circle {
+  fill: var(--ttq-red);
+}
+
+.ttq-tick-spinner__legs line {
+  stroke: var(--ttq-red);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+@keyframes ttqPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+/* Success checkmark */
+.ttq-success-check {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+}
+
+.ttq-success-check__ring {
+  fill: none;
+  stroke: var(--ttq-red);
+  stroke-width: 5;
+  stroke-dasharray: 276;
+  stroke-dashoffset: 276;
+  animation: ttqDrawRing 0.5s ease forwards;
+}
+
+.ttq-success-check__mark {
+  fill: none;
+  stroke: var(--ttq-red);
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 60;
+  stroke-dashoffset: 60;
+  animation: ttqDrawMark 0.35s ease forwards 0.45s;
+}
+
+@keyframes ttqDrawRing {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes ttqDrawMark {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.ttq-error-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #fef2f2;
+  color: #dc2626;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  font-weight: 900;
+  margin: 0 auto;
+}
+
+.ttq-overlay__panel .ttq-btn {
+  margin-top: 22px;
+}
+
+/* ================================================================
+   PANELS
+   ================================================================ */
+.ttq-panel[hidden] {
+  display: none;
+}
+
+/* ================================================================
+   RESPONSIVE
+   ================================================================ */
+@media (max-width: 760px) {
+  .ttq-shell {
+    flex-direction: column;
+  }
+
+  .ttq-rail {
+    flex-direction: row;
+    border-radius: var(--ttq-radius) var(--ttq-radius) 0 0;
+    width: 100%;
+    padding: 18px 20px;
+    justify-content: flex-start;
+    gap: 16px;
+    min-height: unset;
+  }
+
+  .ttq-rail__icon-main {
+    position: static;
+    width: 40px;
+    height: 40px;
+  }
+
+  .ttq-rail__icon-step {
+    display: none;
+  }
+
+  .ttq-rail__stepof {
+    flex-direction: row;
+    gap: 5px;
+  }
+
+  .ttq-rail__stepof-num {
+    font-size: 26px;
+  }
+
+  .ttq-rail__dots {
+    flex-direction: row;
+    margin: 0 0 0 auto;
+  }
+
+  .ttq-rail__dots::before {
+    top: 50%;
+    left: 4px;
+    right: 4px;
+    bottom: auto;
+    width: auto;
+    height: 2px;
+    transform: translateY(-50%);
+  }
+
+  .ttq-rail__bug {
+    display: none;
+  }
+
+  .ttq-content {
+    padding: 24px 20px 28px;
+  }
+
+  .ttq-topbar {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .ttq-topbar__title {
+    width: 100%;
+  }
+
+  .ttq-topbar__title > div {
+    justify-content: center;
+  }
+
+  .ttq-step-track {
+    min-width: unset;
+    width: 100%;
+  }
+
+  .ttq-topbar__trust {
+    max-width: none;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .ttq-product-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ttq-product-card {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+    min-height: unset;
+  }
+
+  .ttq-product-card__media {
+    grid-column: 1;
+    grid-row: 1;
+    height: 200px;
+    border-radius: var(--ttq-radius) var(--ttq-radius) 0 0;
+    border-right: none;
+    border-bottom: 1px solid var(--ttq-gray-100);
+  }
+
+  .ttq-product-card__body {
+    grid-column: 1;
+    grid-row: 2;
+    padding: 20px;
+  }
+
+  .ttq-product-card__footer {
+    grid-column: 1;
+    grid-row: 3;
+    border-radius: 0 0 var(--ttq-radius) var(--ttq-radius);
+  }
+}
+
+@media (max-width: 520px) {
+  .ttq-step-track__label {
+    display: none;
+  }
+
+  .ttq-review-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Custom color input */
+.ttq-custom-color-wrap {
+  margin-top: 14px;
+}
+
+.ttq-custom-color-input {
+  width: 100%;
+  max-width: 400px;
+  padding: 9px 14px;
+  border: 1.5px solid var(--ttq-gray-200);
+  border-radius: var(--ttq-radius-sm, 8px);
+  font-size: 14px;
+  color: var(--ttq-gray-900);
+  background: #fff;
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.ttq-custom-color-input:focus {
+  border-color: var(--ttq-red);
+  box-shadow: 0 0 0 3px var(--ttq-red-glow);
+}
+
+/* Sample limit note below color swatches */
+.ttq-color-note {
+  margin-top: 12px;
+  font-size: 12px;
+  color: var(--ttq-gray-500, #6b7280);
+  line-height: 1.5;
+  font-style: italic;
+}
+
+/* Wide size chips */
+.ttq-size-grid--wide {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.ttq-size-chip--wide {
+  min-width: 140px;
+  padding: 10px 20px;
+  flex: 1 1 140px;
+}
+
+/* ================================================================
+   NEW: Required-field asterisk
+   ================================================================ */
+.ttq-wizard .req {
+  color: var(--ttq-red);
+  margin-left: 2px;
+}
+
+/* ================================================================
+   NEW: "Multiple Sizes Allowed" pill on the sizes section header
+   ================================================================ */
+.ttq-pill-hint {
+  background: var(--ttq-red-light);
+  color: var(--ttq-red);
+  border: 1px solid rgba(183, 28, 43, 0.25);
+  border-radius: 999px;
+  padding: 3px 12px !important;
+  font-weight: 700 !important;
+  font-size: 11px !important;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+/* ================================================================
+   NEW: Product selection confirmation banner (Step 1)
+   ================================================================ */
+.ttq-selected-banner {
+  display: none;
+  align-items: center;
+  gap: 10px;
+  margin-top: 18px;
+  padding: 13px 18px;
+  border-radius: var(--ttq-radius-sm);
+  background: #f0fdf4;
+  border: 1.5px solid #86efac;
+  color: #14532d;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.ttq-selected-banner.is-visible {
+  display: flex;
+  animation: ttqFadeIn 0.25s ease;
+}
+
+.ttq-selected-banner__icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #16a34a;
+  color: #fff;
+}
+
+.ttq-selected-banner strong {
+  color: #14532d;
+}
+
+@keyframes ttqFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ================================================================
+   NEW: "What's Included" / "See Kit Contents" modal (Step 1)
+   ================================================================ */
+.ttq-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.ttq-modal[hidden] {
+  display: none;
+}
+
+.ttq-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(17, 24, 39, 0.55);
+  backdrop-filter: blur(2px);
+  animation: ttqFadeIn 0.2s ease;
+}
+
+.ttq-modal__panel {
+  position: relative;
+  background: #fff;
+  border-radius: var(--ttq-radius);
+  max-width: 560px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 34px 32px 28px;
+  box-shadow: var(--ttq-shadow-lg);
+  animation: ttqModalIn 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes ttqModalIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.ttq-modal__close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: none;
+  background: var(--ttq-gray-100);
+  color: var(--ttq-gray-600);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.ttq-modal__close:hover {
+  background: var(--ttq-gray-200);
+  color: var(--ttq-gray-900);
+}
+
+.ttq-modal__body h4 {
+  margin: 0 0 6px;
+  font-size: 21px;
+  font-weight: 800;
+  color: var(--ttq-gray-900);
+}
+
+.ttq-modal__intro {
+  margin: 0 0 20px;
+  font-size: 14px;
+  color: var(--ttq-gray-600);
+  line-height: 1.6;
+}
+
+.ttq-modal__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ttq-modal__list li {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--ttq-gray-100);
+}
+
+.ttq-modal__list li:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.ttq-modal__list strong {
+  font-size: 14px;
+  color: var(--ttq-red-dark);
+  font-weight: 700;
+}
+
+.ttq-modal__list span {
+  font-size: 13.5px;
+  color: var(--ttq-gray-700);
+  line-height: 1.55;
+}
+
+/* ================================================================
+   NEW: "Need help?" widget — visible on the right on every step
+   ================================================================ */
+.ttq-help-widget {
+  flex: 0 0 280px;
+  align-self: stretch;
+  margin-left: 24px;
+}
+
+.ttq-help-widget__inner {
+  position: sticky;
+  top: 24px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 24px;
+
+  /* কনটেন্ট সেন্টার করার জন্য */
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.ttq-help-widget__inner:hover {
+  transform: translateY(-5px);
+}
+
+.ttq-help-widget__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: var(--ttq-red-light);
+  color: var(--ttq-red);
+  margin-bottom: 16px;
+}
+
+.ttq-help-widget h5 {
+  margin: 0 0 8px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #1a1a1a;
+  letter-spacing: -0.2px;
+}
+
+.ttq-help-widget p {
+  margin: 0 0 16px;
+  font-size: 13px;
+  color: #666;
+  line-height: 1.6;
+}
+
+.ttq-help-widget__email {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: var(--ttq-red);
+  color: #fff;
+  font-weight: 600;
+  font-size: 12px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.ttq-help-widget__email:hover {
+  background: #a51824;
+  box-shadow: 0 4px 12px rgba(183, 28, 43, 0.2);
+}
+
+.ttq-help-widget__footer {
+  margin-top: 16px !important;
+  font-size: 11px !important;
+  color: #999 !important;
+  font-style: italic;
+  text-align: center;
+}
+
+@media (max-width: 1024px) {
+  .ttq-help-widget {
+    flex: 1 1 100%;
+    margin: 20px 0 0;
+  }
+
+  .ttq-help-widget__inner {
+    position: static;
+    padding: 20px;
+  }
+}
+
+/* ================================================================
+   NEW: Material / Carabiner Clip choice cards (Step 2, Complete Kit)
+   ================================================================ */
+.ttq-choice-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.ttq-choice-grid--stack {
+  grid-template-columns: 1fr;
+}
+
+.ttq-choice-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1.5px solid var(--ttq-gray-200);
+  border-radius: var(--ttq-radius-sm);
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  background: #fff;
+}
+
+.ttq-choice-card:hover {
+  border-color: var(--ttq-red);
+}
+
+.ttq-choice-card input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+.ttq-choice-card:has(input:checked) {
+  border-color: var(--ttq-red);
+  background: var(--ttq-red-light);
+  box-shadow: 0 0 0 1px var(--ttq-red);
+}
+
+.ttq-choice-card__radio {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--ttq-gray-300);
+  position: relative;
+}
+
+.ttq-choice-card:has(input:checked) .ttq-choice-card__radio {
+  border-color: var(--ttq-red);
+  background: var(--ttq-red);
+}
+
+.ttq-choice-card:has(input:checked) .ttq-choice-card__radio::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.ttq-choice-card__icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  background: var(--ttq-gray-100);
+  color: var(--ttq-gray-600);
+}
+
+.ttq-choice-card:has(input:checked) .ttq-choice-card__icon {
+  background: #fff;
+  color: var(--ttq-red);
+}
+
+.ttq-choice-card__label {
+  font-weight: 700;
+  font-size: 13.5px;
+  color: var(--ttq-gray-900);
+}
+
+.ttq-choice-card--row {
+  align-items: flex-start;
+}
+
+.ttq-choice-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ttq-choice-card__desc {
+  font-size: 12px;
+  color: var(--ttq-gray-500, #6b7280);
+  font-weight: 400;
+}
+
+@media (max-width: 600px) {
+  .ttq-choice-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ================================================================
+   NEW: "Almost done!" banner on the Review step
+   ================================================================ */
+.ttq-almost-done {
+  margin-top: 0;
+  margin-bottom: 22px;
+}
+
+.ttq-almost-done strong {
+  display: block;
+  margin-bottom: 2px;
+  font-size: 14px;
+}
+
+.ttq-almost-done p {
+  margin: 0;
+  color: inherit;
+  opacity: 0.9;
+}
+
+/* Review card — material/clip rows + product tag reuse existing dl styles */
+.ttq-review-card__product-tag {
+  margin: 10px 0 0;
+  font-size: 11.5px;
+  color: var(--ttq-gray-500, #6b7280);
+  font-style: italic;
+}
