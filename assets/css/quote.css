@@ -1015,7 +1015,7 @@
 .ttq-size-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 20px;
 }
 
 .ttq-color-swatch {
@@ -1037,8 +1037,8 @@
 }
 
 .ttq-color-swatch__dot {
-  width: 38px;
-  height: 38px;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
   background: var(--ttq-swatch-color, #ccc);
   border: 2.5px solid var(--ttq-gray-200);
