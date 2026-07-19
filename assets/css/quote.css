@@ -392,6 +392,28 @@
   margin-bottom: 18px;
   /* push line to center of bubbles */
 }
+@media (max-width: 767px) {
+  .ttq-step-track {
+    min-width: auto;
+    flex: 1 1 100%;
+    gap: 5px;
+  }
+
+  .ttq-step-track__bubble {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+  }
+
+  .ttq-step-track__label {
+    font-size: 9px;
+  }
+
+  .ttq-step-track__line {
+    min-width: 15px;
+    margin-bottom: 14px;
+  }
+}
 
 /* Active & completed states (set by JS) */
 .ttq-step-track__item.is-active .ttq-step-track__bubble {
@@ -486,6 +508,7 @@
   margin: 0;
   font-size: 14px;
   text-align: center;
+  padding: 10px 0px;
 }
 
 .ttq-field-group {

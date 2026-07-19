@@ -7,7 +7,7 @@ if (! defined('ABSPATH')) {
 ?>
 <div class="ttq-step-head">
 	<p class="ttq-sub">
-		<?php esc_html_e('Select either Tick Tweezers or the Complete Tick Kit. Both are excellent tick awareness, education, and prevention resources — ideal for public health outreach, community programs, giveaways, schools, parks, and organizations. Both options can be customized with your logo.', 'ttq'); ?>
+		<?php esc_html_e('Select either Tick Tweezers or the Complete Tick Kit. Both are excellent tick awareness, education, and prevention resources — ideal for public health outreach, community programs, giveaways, schools, parks, and organizations. Both options can be customized.', 'ttq'); ?>
 	</p>
 </div>
 
