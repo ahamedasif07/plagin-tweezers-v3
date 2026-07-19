@@ -741,7 +741,7 @@
   white-space: nowrap;
 }
 
-/* মেইন কন্টেইনার */
+/* main image container */
 .ttq-product-card__media {
   display: flex;
   align-items: center;
@@ -778,6 +778,11 @@
   object-fit: contain;
   object-position: center;
   display: block;
+
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+
+  backface-visibility: hidden;
 }
 /* Card body — below the image */
 .ttq-product-card__body {

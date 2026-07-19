@@ -51,7 +51,8 @@ if (! defined('ABSPATH')) {
 			<span class="ttq-product-card__media">
 				<?php if (! empty($product['image'])) : ?>
 					<img src="<?php echo esc_url($product['image']); ?>" alt="<?php echo esc_attr($product['label']); ?>"
-						style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" />
+						style="width: 100%; height: 100%; object-fit: contain; object-position: center; image-rendering: -webkit-optimize-contrast;"
+						loading="lazy" />
 				<?php else : ?>
 					<span class="ttq-product-card__placeholder" aria-hidden="true">
 						<svg viewBox="0 0 160 120" width="160" height="120">
