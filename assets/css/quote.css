@@ -1037,8 +1037,8 @@
 }
 
 .ttq-color-swatch__dot {
-  width: 45px;
-  height: 45px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   background: var(--ttq-swatch-color, #ccc);
   border: 2.5px solid var(--ttq-gray-200);

@@ -28,8 +28,9 @@ usort($ttq_colors_alpha, function ($a, $b) {
 				<path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
 			</svg>
 		</span>
-		<span class="ttq-section-card__title"><?php esc_html_e('Total Quantity', 'ttq'); ?> <span
-				class="req">*</span></span>
+		<span
+			class="ttq-section-card__title"><?php esc_html_e('Total Quantity / Enter the total number of customized tick tweezers you need.', 'ttq'); ?>
+			<span class="req"></span></span>
 	</div>
 
 	<div class="ttq-field-group">
@@ -99,9 +100,14 @@ if (isset($settings['sizes']) && is_array($settings['sizes']) && count($settings
 					<path d="M15 18H3" />
 				</svg>
 			</span>
-			<span class="ttq-section-card__title"><?php esc_html_e('Select Tick Tweezers Size(s)', 'ttq'); ?> <span
-					class="req">*</span></span>
-			<span class="ttq-section-card__hint ttq-pill-hint"><?php esc_html_e('Multiple Sizes Allowed', 'ttq'); ?></span>
+			<!-- <span class="ttq-section-card__title"><?php esc_html_e('Select Tick Tweezers Size(s)', 'ttq'); ?> <span
+					class="req">*</span>/
+				Multiple Sizes Allowed</span> -->
+			<span
+				class="ttq-section-card__title"><?php esc_html_e(' Select Tick Tweezers Size(s) * Choose the size options that best fit your needs.', 'ttq'); ?>
+				<span class="req">*</span>
+				<span
+					class="ttq-section-card__hint ttq-pill-hint"><?php esc_html_e('Multiple Sizes Allowed', 'ttq'); ?></span>
 		</div>
 
 		<div class="ttq-size-grid ttq-size-grid--wide" role="group"
