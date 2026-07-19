@@ -236,38 +236,14 @@ if (isset($settings['sizes']) && is_array($settings['sizes']) && count($settings
 		</span>
 		<span
 			class="ttq-section-card__title"><?php esc_html_e('Add Your Personalization / Customization', 'ttq'); ?></span>
-		<span class="ttq-section-card__hint"><?php esc_html_e('Optional', 'ttq'); ?></span>
+		<span class="ttq-section-card__hint ttq-pill-hint"><?php esc_html_e('Optional', 'ttq'); ?></span>
 	</div>
 
-	<div class="ttq-field-group--split">
-		<div>
-			<label class="ttq-field-label ttq-js-side1-label"
-				for="ttq-side1"><?php esc_html_e('Side 1 Stamping', 'ttq'); ?></label>
-			<input type="text" id="ttq-side1" name="side1"
-				maxlength="<?php echo esc_attr($settings['personalization_max_chars']); ?>" class="ttq-js-char-counter"
-				data-max="<?php echo esc_attr($settings['personalization_max_chars']); ?>"
-				placeholder="<?php esc_attr_e('e.g. your website or phone', 'ttq'); ?>" />
-			<p class="ttq-char-counter"><span
-					class="ttq-js-char-count">0</span>/<?php echo esc_html($settings['personalization_max_chars']); ?>
-				<?php esc_html_e('chars', 'ttq'); ?></p>
-			<div class="ttq-field-error" data-error-for="side1" role="alert"></div>
-		</div>
-		<div>
-			<label class="ttq-field-label ttq-js-side2-label"
-				for="ttq-side2"><?php esc_html_e('Side 2 Stamping', 'ttq'); ?> <span
-					class="ttq-optional"><?php esc_html_e('Optional', 'ttq'); ?></span></label>
-			<input type="text" id="ttq-side2" name="side2"
-				maxlength="<?php echo esc_attr($settings['personalization_max_chars']); ?>" class="ttq-js-char-counter"
-				data-max="<?php echo esc_attr($settings['personalization_max_chars']); ?>"
-				placeholder="<?php esc_attr_e('e.g. a tagline or message', 'ttq'); ?>" />
-			<p class="ttq-char-counter"><span
-					class="ttq-js-char-count">0</span>/<?php echo esc_html($settings['personalization_max_chars']); ?>
-				<?php esc_html_e('chars', 'ttq'); ?></p>
-			<div class="ttq-field-error" data-error-for="side2" role="alert"></div>
-		</div>
-	</div>
+	<p class="ttq-field-hint-text ttq-personalization-sub">
+		<?php esc_html_e('Add a name, tagline, website URL, and/or logo to Side 1 and/or Side 2 of your tick removal tweezers.', 'ttq'); ?>
+	</p>
 
-	<div class="ttq-callout ttq-callout--neutral ttq-callout--compact">
+	<div class="ttq-callout ttq-callout--warning ttq-callout--compact">
 		<span class="ttq-callout__icon" aria-hidden="true">
 			<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
 				stroke-linecap="round" stroke-linejoin="round">
@@ -279,6 +255,138 @@ if (isset($settings['sizes']) && is_array($settings['sizes']) && count($settings
 			<?php esc_html_e("Don't have everything finalized yet? No problem — submit the form with whatever information you have, and our team can help with the rest.", 'ttq'); ?>
 		</div>
 	</div>
+
+	<div class="ttq-personalization-grid">
+		<?php
+		$ttq_personalization_sides = array(
+			'side1' => array(
+				'title'      => __('Side 1 Personalization', 'ttq'),
+				'upload_hint' => __('Upload a logo or artwork for Side 1.', 'ttq'),
+			),
+			'side2' => array(
+				'title'      => __('Side 2 Personalization (Optional)', 'ttq'),
+				'upload_hint' => __('Upload a logo or artwork for Side 2.', 'ttq'),
+			),
+		);
+		foreach ($ttq_personalization_sides as $ttq_side_key => $ttq_side) :
+		?>
+			<div class="ttq-personalization-col">
+				<h4 class="ttq-personalization-col__title"><?php echo esc_html($ttq_side['title']); ?></h4>
+
+				<div class="ttq-tag-row" role="group"
+					aria-label="<?php echo esc_attr(sprintf(__('%s personalization type', 'ttq'), $ttq_side['title'])); ?>">
+					<button type="button" class="ttq-tag-btn ttq-js-tag-btn"
+						data-target="ttq-<?php echo esc_attr($ttq_side_key); ?>">
+						<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+							stroke-linecap="round" stroke-linejoin="round">
+							<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+							<circle cx="12" cy="7" r="4" />
+						</svg>
+						<span><?php esc_html_e('Name', 'ttq'); ?></span>
+					</button>
+					<button type="button" class="ttq-tag-btn ttq-js-tag-btn"
+						data-target="ttq-<?php echo esc_attr($ttq_side_key); ?>">
+						<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+							stroke-linecap="round" stroke-linejoin="round">
+							<polyline points="4 7 4 4 20 4 20 7" />
+							<line x1="12" y1="4" x2="12" y2="20" />
+							<line x1="9" y1="20" x2="15" y2="20" />
+						</svg>
+						<span><?php esc_html_e('Tagline', 'ttq'); ?></span>
+					</button>
+					<button type="button" class="ttq-tag-btn ttq-js-tag-btn"
+						data-target="ttq-<?php echo esc_attr($ttq_side_key); ?>">
+						<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+							stroke-linecap="round" stroke-linejoin="round">
+							<circle cx="12" cy="12" r="10" />
+							<line x1="2" y1="12" x2="22" y2="12" />
+							<path
+								d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+						</svg>
+						<span><?php esc_html_e('Website URL', 'ttq'); ?></span>
+					</button>
+					<button type="button" class="ttq-tag-btn ttq-js-tag-btn-logo"
+						data-target="ttq-<?php echo esc_attr($ttq_side_key); ?>-dropzone">
+						<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+							stroke-linecap="round" stroke-linejoin="round">
+							<rect x="3" y="3" width="18" height="18" rx="2" />
+							<circle cx="8.5" cy="8.5" r="1.5" />
+							<polyline points="21 15 16 10 5 21" />
+						</svg>
+						<span><?php esc_html_e('Logo', 'ttq'); ?></span>
+					</button>
+				</div>
+
+				<div class="ttq-field-group">
+					<label class="ttq-field-label"
+						for="ttq-<?php echo esc_attr($ttq_side_key); ?>"><?php esc_html_e('Custom Text (Name, Tagline, or Website URL)', 'ttq'); ?></label>
+					<input type="text" id="ttq-<?php echo esc_attr($ttq_side_key); ?>"
+						name="<?php echo esc_attr($ttq_side_key); ?>"
+						maxlength="<?php echo esc_attr($settings['personalization_max_chars']); ?>"
+						class="ttq-js-char-counter"
+						data-max="<?php echo esc_attr($settings['personalization_max_chars']); ?>"
+						placeholder="<?php esc_attr_e('Enter a name, tagline, or website URL', 'ttq'); ?>" />
+					<p class="ttq-hint"><?php esc_html_e('You can provide a name, tagline, or website URL.', 'ttq'); ?></p>
+					<p class="ttq-char-counter"><span
+							class="ttq-js-char-count">0</span>/<?php echo esc_html($settings['personalization_max_chars']); ?>
+						<?php esc_html_e('chars', 'ttq'); ?></p>
+					<div class="ttq-field-error" data-error-for="<?php echo esc_attr($ttq_side_key); ?>" role="alert"></div>
+				</div>
+
+				<div class="ttq-field-group ttq-side-uploader-group">
+					<label class="ttq-field-label"><?php esc_html_e('Upload Logo / Artwork', 'ttq'); ?></label>
+					<div class="ttq-uploader ttq-js-side-uploader" data-side="<?php echo esc_attr($ttq_side_key); ?>">
+						<div class="ttq-uploader__dropzone ttq-side-dropzone ttq-js-side-dropzone"
+							id="ttq-<?php echo esc_attr($ttq_side_key); ?>-dropzone" tabindex="0" role="button"
+							aria-label="<?php echo esc_attr(sprintf(__('Click to upload or drag and drop a logo for %s', 'ttq'), $ttq_side['title'])); ?>">
+							<svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true" fill="none"
+								stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+								<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+								<polyline points="17 8 12 3 7 8" />
+								<line x1="12" y1="3" x2="12" y2="15" />
+							</svg>
+							<p><?php esc_html_e('Click to upload or drag and drop', 'ttq'); ?></p>
+							<p class="ttq-hint"><?php echo esc_html(strtoupper($settings['allowed_file_types'])); ?></p>
+							<input type="file" class="ttq-visually-hidden ttq-js-side-file-input"
+								accept="<?php echo esc_attr('.' . str_replace(',', ',.', $settings['allowed_file_types'])); ?>" />
+						</div>
+						<div class="ttq-uploader__preview ttq-js-side-preview" hidden>
+							<img class="ttq-js-side-preview-img" alt="" />
+							<span class="ttq-js-side-preview-name"></span>
+							<button type="button"
+								class="ttq-link-btn ttq-link-btn--danger ttq-js-side-upload-remove"><?php esc_html_e('Remove', 'ttq'); ?></button>
+						</div>
+						<div class="ttq-field-error" data-error-for="<?php echo esc_attr($ttq_side_key); ?>_logo"
+							role="alert"></div>
+						<input type="hidden" name="<?php echo esc_attr($ttq_side_key); ?>_logo_token"
+							class="ttq-js-side-logo-token" value="" />
+					</div>
+					<p class="ttq-hint"><?php echo esc_html($ttq_side['upload_hint']); ?></p>
+				</div>
+			</div>
+		<?php endforeach; ?>
+	</div>
+
+	<div class="ttq-callout ttq-callout--warning ttq-callout--compact">
+		<span class="ttq-callout__icon" aria-hidden="true">
+			<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+				stroke-linecap="round" stroke-linejoin="round">
+				<circle cx="12" cy="12" r="10" />
+				<line x1="12" y1="16" x2="12" y2="12" />
+				<line x1="12" y1="8" x2="12.01" y2="8" />
+			</svg>
+		</span>
+		<div>
+			<strong><?php esc_html_e('Not sure yet?', 'ttq'); ?></strong>
+			<?php esc_html_e("That's okay. You can leave this section blank or submit whatever information you have now. We'll follow up to help finalize your customization.", 'ttq'); ?>
+		</div>
+	</div>
+
+	<p class="ttq-personalization-examples">
+		<?php esc_html_e('Examples: Organization Name', 'ttq'); ?> &bull;
+		<?php esc_html_e('Tick Removal Tweezers', 'ttq'); ?>
+		&bull; <?php esc_html_e('BE TICK SMART', 'ttq'); ?>
+	</p>
 
 	<!-- Additional comments -->
 	<div class="ttq-field-group" style="margin-top:18px;">

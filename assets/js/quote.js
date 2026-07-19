@@ -273,11 +273,17 @@
   }
 
   wizard.addEventListener("change", function (e) {
-    if (e.target.classList && e.target.classList.contains("ttq-js-product-radio")) {
+    if (
+      e.target.classList &&
+      e.target.classList.contains("ttq-js-product-radio")
+    ) {
       readFormIntoState();
       updateProductUI();
     }
-    if (e.target.classList && e.target.classList.contains("ttq-js-free-sample")) {
+    if (
+      e.target.classList &&
+      e.target.classList.contains("ttq-js-free-sample")
+    ) {
       readFormIntoState();
       updateFreeSampleUI();
     }
@@ -377,7 +383,8 @@
     state.product =
       (form.querySelector('input[name="product"]:checked') || {}).value || "";
     var qtyRaw = (form.querySelector('[name="quantity"]') || {}).value;
-    state.quantity = qtyRaw === "" || qtyRaw === undefined ? "" : (parseInt(qtyRaw, 10) || 0);
+    state.quantity =
+      qtyRaw === "" || qtyRaw === undefined ? "" : parseInt(qtyRaw, 10) || 0;
     state.colors = Array.prototype.map.call(
       form.querySelectorAll('input[name="colors[]"]:checked'),
       function (el) {
@@ -400,13 +407,15 @@
     state.address = (form.querySelector('[name="address"]') || {}).value || "";
     var freeEl = form.querySelector('input[name="free_sample"]:checked');
     state.free_sample = freeEl ? freeEl.value : "no";
-    state.custom_color = (form.querySelector('[name="custom_color"]') || {}).value || "";
+    state.custom_color =
+      (form.querySelector('[name="custom_color"]') || {}).value || "";
 
     var materialEl = form.querySelector('input[name="material"]:checked');
     state.material = materialEl ? materialEl.value : "fabric";
     var clipEl = form.querySelector('input[name="carabiner_clip"]:checked');
     state.carabiner_clip = clipEl ? clipEl.value : "no";
-    state.comments = (form.querySelector('[name="comments"]') || {}).value || "";
+    state.comments =
+      (form.querySelector('[name="comments"]') || {}).value || "";
   }
 
   /* ── Navigation ─────────────────────────────────────────────── */
@@ -899,6 +908,163 @@
     }
   });
 
+  /* ── Personalization: quick tag buttons ────────────────────── */
+  wizard.addEventListener("click", function (e) {
+    var tagBtn = e.target.closest(".ttq-js-tag-btn");
+    if (tagBtn) {
+      var targetInput = document.getElementById(
+        tagBtn.getAttribute("data-target"),
+      );
+      if (targetInput) {
+        targetInput.focus();
+      }
+      return;
+    }
+    var logoTagBtn = e.target.closest(".ttq-js-tag-btn-logo");
+    if (logoTagBtn) {
+      var targetZone = document.getElementById(
+        logoTagBtn.getAttribute("data-target"),
+      );
+      if (targetZone) {
+        targetZone.scrollIntoView({ behavior: "smooth", block: "center" });
+        targetZone.focus();
+      }
+    }
+  });
+
+  /* ── Personalization: per-side logo uploaders (Side 1 / Side 2) ── */
+  wizard
+    .querySelectorAll(".ttq-js-side-uploader")
+    .forEach(function (uploaderEl) {
+      var sideDropzone = uploaderEl.querySelector(".ttq-js-side-dropzone");
+      var sideFileInput = uploaderEl.querySelector(".ttq-js-side-file-input");
+      var sidePreview = uploaderEl.querySelector(".ttq-js-side-preview");
+      var sidePreviewImg = uploaderEl.querySelector(".ttq-js-side-preview-img");
+      var sidePreviewName = uploaderEl.querySelector(
+        ".ttq-js-side-preview-name",
+      );
+      var sideTokenInput = uploaderEl.querySelector(".ttq-js-side-logo-token");
+      var sideKey = uploaderEl.getAttribute("data-side");
+      var sideErrEl = wizard.querySelector(
+        '[data-error-for="' + sideKey + '_logo"]',
+      );
+
+      function showSidePreview(url, name) {
+        if (sidePreviewImg) {
+          sidePreviewImg.src = url;
+        }
+        if (sidePreviewName) {
+          sidePreviewName.textContent = name;
+        }
+        if (sidePreview) {
+          sidePreview.hidden = false;
+        }
+        if (sideDropzone) {
+          sideDropzone.hidden = true;
+        }
+      }
+
+      function resetSideUpload() {
+        if (sideTokenInput) {
+          sideTokenInput.value = "";
+        }
+        if (sidePreview) {
+          sidePreview.hidden = true;
+        }
+        if (sideDropzone) {
+          sideDropzone.hidden = false;
+        }
+        if (sideFileInput) {
+          sideFileInput.value = "";
+        }
+      }
+
+      function uploadSideLogo(file) {
+        if (sideErrEl) {
+          sideErrEl.textContent = "";
+        }
+
+        var body = new FormData();
+        body.append("action", "ttq_upload_logo");
+        body.append("nonce", TTQ_DATA.nonce);
+        body.append("logo", file);
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", TTQ_DATA.ajaxUrl, true);
+
+        xhr.onload = function () {
+          var res;
+          try {
+            res = JSON.parse(xhr.responseText);
+          } catch (e) {
+            res = null;
+          }
+          if (res && res.success) {
+            if (sideTokenInput) {
+              sideTokenInput.value = res.data.token;
+            }
+            showSidePreview(res.data.previewUrl, res.data.fileName);
+            saveState();
+          } else if (sideErrEl) {
+            sideErrEl.textContent =
+              res && res.data && res.data.message
+                ? res.data.message
+                : TTQ_DATA.i18n.genericError;
+          }
+        };
+
+        xhr.onerror = function () {
+          if (sideErrEl) {
+            sideErrEl.textContent = TTQ_DATA.i18n.genericError;
+          }
+        };
+
+        xhr.send(body);
+      }
+
+      if (sideDropzone) {
+        sideDropzone.addEventListener("click", function () {
+          sideFileInput.click();
+        });
+        sideDropzone.addEventListener("keydown", function (e) {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            sideFileInput.click();
+          }
+        });
+        ["dragenter", "dragover"].forEach(function (evt) {
+          sideDropzone.addEventListener(evt, function (e) {
+            e.preventDefault();
+            sideDropzone.classList.add("is-dragover");
+          });
+        });
+        ["dragleave", "drop"].forEach(function (evt) {
+          sideDropzone.addEventListener(evt, function (e) {
+            e.preventDefault();
+            sideDropzone.classList.remove("is-dragover");
+          });
+        });
+        sideDropzone.addEventListener("drop", function (e) {
+          var file = e.dataTransfer.files && e.dataTransfer.files[0];
+          if (file) {
+            uploadSideLogo(file);
+          }
+        });
+      }
+      if (sideFileInput) {
+        sideFileInput.addEventListener("change", function () {
+          if (sideFileInput.files && sideFileInput.files[0]) {
+            uploadSideLogo(sideFileInput.files[0]);
+          }
+        });
+      }
+      uploaderEl.addEventListener("click", function (e) {
+        if (e.target.closest(".ttq-js-side-upload-remove")) {
+          resetSideUpload();
+        }
+      });
+    });
+
   /* ── Review population ──────────────────────────────────────── */
   function labelFor(list, key) {
     var match = list.filter(function (item) {
@@ -948,9 +1114,15 @@
     setReview("comments", state.comments || "—");
 
     var isKit = state.product === "complete_kit";
-    var materialLabels = { fabric: "Fabric / Canvas", synthetic_leather: "Synthetic Leather" };
+    var materialLabels = {
+      fabric: "Fabric / Canvas",
+      synthetic_leather: "Synthetic Leather",
+    };
     setReview("material", isKit ? materialLabels[state.material] || "—" : "—");
-    setReview("carabiner_clip", isKit ? (state.carabiner_clip === "yes" ? "Yes" : "No") : "—");
+    setReview(
+      "carabiner_clip",
+      isKit ? (state.carabiner_clip === "yes" ? "Yes" : "No") : "—",
+    );
     var materialRow = wizard.querySelector(".ttq-js-review-material-row");
     var clipRow = wizard.querySelector(".ttq-js-review-clip-row");
     if (materialRow) materialRow.style.display = isKit ? "" : "none";
@@ -1040,9 +1212,9 @@
     if (e.target.closest(".ttq-js-overlay-close")) {
       var successPanel = wizard.querySelector(".ttq-js-overlay-success");
       var isSuccess = successPanel && !successPanel.hidden;
-      
+
       hideOverlay();
-      
+
       if (isSuccess) {
         if (TTQ_DATA.redirectUrl) {
           window.location.href = TTQ_DATA.redirectUrl;
@@ -1055,7 +1227,7 @@
     if (e.target.closest(".ttq-js-submit")) {
       readFormIntoState();
       showOverlay("submitting");
-      
+
       // Set to 5 so the progress bar reaches 100% and all steps turn green
       wizard.setAttribute("data-step", "5");
       updateTrack(5);
@@ -1110,7 +1282,7 @@
                 msgEl.textContent = res.data.message;
               }
               showOverlay("success");
-              
+
               // Reset JS state silently in background
               state.product = "";
               state.quantity = "";
@@ -1131,12 +1303,12 @@
               state.material = "fabric";
               state.carabiner_clip = "no";
               state.comments = "";
-              
+
               // Clear session storage so returning user gets fresh form
               try {
                 sessionStorage.removeItem(STORAGE_KEY);
               } catch (e) {}
-              
+
               // Reset all form inputs in background (user stays on popup)
               if (form) {
                 form.reset();

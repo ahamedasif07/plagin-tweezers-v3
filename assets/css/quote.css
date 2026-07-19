@@ -1187,6 +1187,109 @@
 }
 
 /* ================================================================
+   NEW: Personalization section (Side 1 / Side 2 layout)
+   ================================================================ */
+.ttq-personalization-sub {
+  margin: -6px 0 0;
+  font-size: 13px;
+  color: var(--ttq-gray-600);
+}
+
+.ttq-personalization-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 18px;
+}
+
+@media (max-width: 680px) {
+  .ttq-personalization-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ttq-personalization-col__title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ttq-gray-900);
+  margin: 0 0 12px;
+}
+
+.ttq-tag-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+@media (max-width: 420px) {
+  .ttq-tag-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.ttq-tag-btn,
+.ttq-tag-btn-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 6px;
+  border: 1.5px solid var(--ttq-gray-200);
+  border-radius: var(--ttq-radius-sm);
+  background: #fff;
+  color: var(--ttq-gray-600);
+  font-size: 11px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition:
+    border-color 0.15s,
+    color 0.15s,
+    background 0.15s;
+}
+
+.ttq-tag-btn:hover,
+.ttq-tag-btn-logo:hover,
+.ttq-tag-btn:focus-visible,
+.ttq-tag-btn-logo:focus-visible {
+  border-color: var(--ttq-red);
+  color: var(--ttq-red);
+  background: var(--ttq-red-light);
+  outline: none;
+}
+
+.ttq-tag-btn svg,
+.ttq-tag-btn-logo svg {
+  flex-shrink: 0;
+}
+
+.ttq-side-uploader-group {
+  margin-top: 18px;
+}
+
+.ttq-side-dropzone {
+  padding: 26px 16px;
+}
+
+.ttq-side-dropzone svg {
+  color: var(--ttq-gray-300);
+}
+
+.ttq-side-dropzone p {
+  margin: 8px 0 0;
+  font-size: 13px;
+}
+
+.ttq-personalization-examples {
+  text-align: center;
+  font-size: 12px;
+  color: var(--ttq-gray-400);
+  margin: 18px 0 0;
+}
+
+/* ================================================================
    STEP 3 — CONTACT CARD SECTIONS
    ================================================================ */
 .ttq-contact-card {
