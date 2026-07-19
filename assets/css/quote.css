@@ -2098,18 +2098,22 @@
   height: 34px;
   border-radius: 50%;
   border: none;
-  background: var(--ttq-gray-100);
-  color: var(--ttq-gray-600);
+  background: #dc2626;
+  color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background 0.15s ease;
+  transition: background 0.2s ease;
+  padding: 0;
 }
 
 .ttq-modal__close:hover {
-  background: var(--ttq-gray-200);
-  color: var(--ttq-gray-900);
+  background: #b91c1c;
+}
+
+.ttq-modal__close svg {
+  display: block;
 }
 
 .ttq-modal__body h4 {
@@ -2236,6 +2240,7 @@
 .ttq-help-widget__email:hover {
   background: #a51824;
   box-shadow: 0 4px 12px rgba(183, 28, 43, 0.2);
+  color: #fff !important;
 }
 
 .ttq-help-widget__footer {

@@ -36,8 +36,7 @@ usort($ttq_colors_alpha, function ($a, $b) {
 		<div class="ttq-qty-stepper">
 			<button type="button" class="ttq-qty-btn ttq-js-qty-dec"
 				aria-label="<?php esc_attr_e('Decrease quantity', 'ttq'); ?>">&minus;</button>
-			<input type="number" id="ttq-quantity" name="quantity" inputmode="numeric"
-				value="" placeholder="0"
+			<input type="number" id="ttq-quantity" name="quantity" inputmode="numeric" value="" placeholder="_ _"
 				min="<?php echo esc_attr($settings['min_quantity']); ?>"
 				max="<?php echo esc_attr($settings['max_quantity']); ?>" />
 			<button type="button" class="ttq-qty-btn ttq-js-qty-inc"
@@ -128,19 +127,26 @@ if (isset($settings['sizes']) && is_array($settings['sizes']) && count($settings
 		<span class="ttq-section-card__icon" aria-hidden="true">
 			<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
 				stroke-linecap="round" stroke-linejoin="round">
-				<path d="M3 3h18v18H3z" /><path d="M3 9h18M9 21V9" />
+				<path d="M3 3h18v18H3z" />
+				<path d="M3 9h18M9 21V9" />
 			</svg>
 		</span>
-		<span class="ttq-section-card__title"><?php esc_html_e('Choose Your Material', 'ttq'); ?> <span class="req">*</span></span>
+		<span class="ttq-section-card__title"><?php esc_html_e('Choose Your Material', 'ttq'); ?> <span
+				class="req">*</span></span>
 	</div>
-	<p class="ttq-field-hint-text"><?php esc_html_e('Both fabric and synthetic leather samples will be shipped.', 'ttq'); ?></p>
+	<p class="ttq-field-hint-text">
+		<?php esc_html_e('Both fabric and synthetic leather samples will be shipped.', 'ttq'); ?></p>
 
 	<div class="ttq-choice-grid" role="radiogroup" aria-label="<?php esc_attr_e('Choose your material', 'ttq'); ?>">
 		<label class="ttq-choice-card">
 			<input type="radio" name="material" value="fabric" checked />
 			<span class="ttq-choice-card__radio" aria-hidden="true"></span>
 			<span class="ttq-choice-card__icon" aria-hidden="true">
-				<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 9h18M3 15h18M9 3v18M15 3v18" /></svg>
+				<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+					stroke-linecap="round" stroke-linejoin="round">
+					<rect x="3" y="3" width="18" height="18" rx="2" />
+					<path d="M3 9h18M3 15h18M9 3v18M15 3v18" />
+				</svg>
 			</span>
 			<span class="ttq-choice-card__label"><?php esc_html_e('Fabric / Canvas', 'ttq'); ?></span>
 		</label>
@@ -148,7 +154,10 @@ if (isset($settings['sizes']) && is_array($settings['sizes']) && count($settings
 			<input type="radio" name="material" value="synthetic_leather" />
 			<span class="ttq-choice-card__radio" aria-hidden="true"></span>
 			<span class="ttq-choice-card__icon" aria-hidden="true">
-				<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z" /></svg>
+				<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+					stroke-linecap="round" stroke-linejoin="round">
+					<path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z" />
+				</svg>
 			</span>
 			<span class="ttq-choice-card__label"><?php esc_html_e('Synthetic Leather', 'ttq'); ?></span>
 		</label>
@@ -162,35 +171,48 @@ if (isset($settings['sizes']) && is_array($settings['sizes']) && count($settings
 		<span class="ttq-section-card__icon" aria-hidden="true">
 			<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
 				stroke-linecap="round" stroke-linejoin="round">
-				<circle cx="8" cy="6" r="3" /><path d="M8 9v9a3 3 0 0 0 6 0v-2" />
+				<circle cx="8" cy="6" r="3" />
+				<path d="M8 9v9a3 3 0 0 0 6 0v-2" />
 			</svg>
 		</span>
 		<span class="ttq-section-card__title"><?php esc_html_e('Add a Carabiner Clip?', 'ttq'); ?></span>
 		<span class="ttq-section-card__hint"><?php esc_html_e('Optional', 'ttq'); ?></span>
 	</div>
-	<p class="ttq-field-hint-text"><?php esc_html_e('This clip can be added to either Fabric / Canvas or Synthetic Leather.', 'ttq'); ?></p>
+	<p class="ttq-field-hint-text">
+		<?php esc_html_e('This clip can be added to either Fabric / Canvas or Synthetic Leather.', 'ttq'); ?></p>
 
-	<div class="ttq-choice-grid ttq-choice-grid--stack" role="radiogroup" aria-label="<?php esc_attr_e('Add a carabiner clip', 'ttq'); ?>">
+	<div class="ttq-choice-grid ttq-choice-grid--stack" role="radiogroup"
+		aria-label="<?php esc_attr_e('Add a carabiner clip', 'ttq'); ?>">
 		<label class="ttq-choice-card ttq-choice-card--row">
 			<input type="radio" name="carabiner_clip" value="yes" />
 			<span class="ttq-choice-card__radio" aria-hidden="true"></span>
 			<span class="ttq-choice-card__icon" aria-hidden="true">
-				<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="9" width="10" height="12" rx="2" /><path d="M9 9V6a3 3 0 0 1 6 0" /></svg>
+				<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+					stroke-linecap="round" stroke-linejoin="round">
+					<rect x="7" y="9" width="10" height="12" rx="2" />
+					<path d="M9 9V6a3 3 0 0 1 6 0" />
+				</svg>
 			</span>
 			<span class="ttq-choice-card__body">
 				<span class="ttq-choice-card__label"><?php esc_html_e('Yes, Add Carabiner Clip', 'ttq'); ?></span>
-				<span class="ttq-choice-card__desc"><?php esc_html_e('Attach a clip for easy carrying or display.', 'ttq'); ?></span>
+				<span
+					class="ttq-choice-card__desc"><?php esc_html_e('Attach a clip for easy carrying or display.', 'ttq'); ?></span>
 			</span>
 		</label>
 		<label class="ttq-choice-card ttq-choice-card--row">
 			<input type="radio" name="carabiner_clip" value="no" checked />
 			<span class="ttq-choice-card__radio" aria-hidden="true"></span>
 			<span class="ttq-choice-card__icon" aria-hidden="true">
-				<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><line x1="8" y1="12" x2="16" y2="12" /></svg>
+				<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+					stroke-linecap="round" stroke-linejoin="round">
+					<circle cx="12" cy="12" r="10" />
+					<line x1="8" y1="12" x2="16" y2="12" />
+				</svg>
 			</span>
 			<span class="ttq-choice-card__body">
 				<span class="ttq-choice-card__label"><?php esc_html_e('No Clip Needed', 'ttq'); ?></span>
-				<span class="ttq-choice-card__desc"><?php esc_html_e('Keep the kit as-is without the clip.', 'ttq'); ?></span>
+				<span
+					class="ttq-choice-card__desc"><?php esc_html_e('Keep the kit as-is without the clip.', 'ttq'); ?></span>
 			</span>
 		</label>
 	</div>
@@ -206,13 +228,15 @@ if (isset($settings['sizes']) && is_array($settings['sizes']) && count($settings
 				<path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
 			</svg>
 		</span>
-		<span class="ttq-section-card__title"><?php esc_html_e('Add Your Personalization / Customization', 'ttq'); ?></span>
+		<span
+			class="ttq-section-card__title"><?php esc_html_e('Add Your Personalization / Customization', 'ttq'); ?></span>
 		<span class="ttq-section-card__hint"><?php esc_html_e('Optional', 'ttq'); ?></span>
 	</div>
 
 	<div class="ttq-field-group--split">
 		<div>
-			<label class="ttq-field-label ttq-js-side1-label" for="ttq-side1"><?php esc_html_e('Side 1 Stamping', 'ttq'); ?></label>
+			<label class="ttq-field-label ttq-js-side1-label"
+				for="ttq-side1"><?php esc_html_e('Side 1 Stamping', 'ttq'); ?></label>
 			<input type="text" id="ttq-side1" name="side1"
 				maxlength="<?php echo esc_attr($settings['personalization_max_chars']); ?>" class="ttq-js-char-counter"
 				data-max="<?php echo esc_attr($settings['personalization_max_chars']); ?>"
@@ -223,7 +247,8 @@ if (isset($settings['sizes']) && is_array($settings['sizes']) && count($settings
 			<div class="ttq-field-error" data-error-for="side1" role="alert"></div>
 		</div>
 		<div>
-			<label class="ttq-field-label ttq-js-side2-label" for="ttq-side2"><?php esc_html_e('Side 2 Stamping', 'ttq'); ?> <span
+			<label class="ttq-field-label ttq-js-side2-label"
+				for="ttq-side2"><?php esc_html_e('Side 2 Stamping', 'ttq'); ?> <span
 					class="ttq-optional"><?php esc_html_e('Optional', 'ttq'); ?></span></label>
 			<input type="text" id="ttq-side2" name="side2"
 				maxlength="<?php echo esc_attr($settings['personalization_max_chars']); ?>" class="ttq-js-char-counter"
@@ -238,7 +263,11 @@ if (isset($settings['sizes']) && is_array($settings['sizes']) && count($settings
 
 	<div class="ttq-callout ttq-callout--neutral ttq-callout--compact">
 		<span class="ttq-callout__icon" aria-hidden="true">
-			<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" /></svg>
+			<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+				stroke-linecap="round" stroke-linejoin="round">
+				<path
+					d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+			</svg>
 		</span>
 		<div>
 			<?php esc_html_e("Don't have everything finalized yet? No problem — submit the form with whatever information you have, and our team can help with the rest.", 'ttq'); ?>
